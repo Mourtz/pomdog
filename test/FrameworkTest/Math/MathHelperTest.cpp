@@ -6,6 +6,23 @@
 
 namespace MathHelper = Pomdog::MathHelper;
 
+TEST(MathHelper, Constants)
+{
+    namespace Math = Pomdog::Math;
+    EXPECT_EQ(Math::Pi<double>,         3.14159265358979323846);
+    EXPECT_EQ(Math::TwoPi<double>,      6.28318530717958647692);
+    EXPECT_EQ(Math::OneOverPi<double>,  0.31830988618379067154);
+    EXPECT_EQ(Math::OneOver2Pi<double>, 0.15915494309189533576);
+    EXPECT_EQ(Math::PiOver2<double>,    1.57079632679489661923);
+    EXPECT_EQ(Math::PiOver4<double>,    0.78539816339744830962);
+    EXPECT_EQ(Math::Pi<float>,         3.1415926535f);
+    EXPECT_EQ(Math::TwoPi<float>,      6.2831853071f);
+    EXPECT_EQ(Math::OneOverPi<float>,  0.3183098861f);
+    EXPECT_EQ(Math::OneOver2Pi<float>, 0.1591549430f);
+    EXPECT_EQ(Math::PiOver2<float>,    1.5707963267f);
+    EXPECT_EQ(Math::PiOver4<float>,    0.7853981633f);
+}
+
 TEST(MathHelper, Clamp)
 {
     EXPECT_EQ(0.0, MathHelper::Clamp(std::numeric_limits<double>::lowest(), 0.0, 1.0));
