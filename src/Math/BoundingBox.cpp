@@ -4,6 +4,7 @@
 #include "Pomdog/Math/BoundingBox.hpp"
 #include "Pomdog/Math/ContainmentType.hpp"
 #include "Pomdog/Math/BoundingSphere.hpp"
+#include "Pomdog/Math/Ray.hpp"
 #include "Pomdog/Utility/Assert.hpp"
 
 namespace Pomdog {
@@ -14,13 +15,13 @@ BoundingBox::BoundingBox(Vector3 const& minIn, Vector3 const& maxIn)
     : Min(minIn), Max(maxIn)
 {}
 //-----------------------------------------------------------------------
-bool BoundingBox::operator==(BoundingBox const& box) const
+bool BoundingBox::operator==(BoundingBox const& box) const noexcept
 {
     return this->Max == box.Max
         && this->Min == box.Min;
 }
 //-----------------------------------------------------------------------
-bool BoundingBox::operator!=(BoundingBox const& box) const
+bool BoundingBox::operator!=(BoundingBox const& box) const noexcept
 {
     return this->Max != box.Max
         || this->Min != box.Min;
@@ -93,6 +94,11 @@ bool BoundingBox::Intersects(BoundingSphere const& sphere) const
     auto clamped = Vector3::Clamp(sphere.Center, this->Min, this->Max);
     auto distanceSquared = Vector3::DistanceSquared(sphere.Center, clamped);
     return distanceSquared <= sphere.Radius * sphere.Radius;
+}
+//-----------------------------------------------------------------------
+Optional<float> BoundingBox::Intersects(Ray const& ray) const
+{
+    return ray.Intersects(*this);
 }
 //-----------------------------------------------------------------------
 std::array<Vector3, BoundingBox::CornerCount> BoundingBox::GetCorners() const noexcept

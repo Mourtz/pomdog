@@ -4,6 +4,7 @@
 #include "Pomdog/Math/BoundingSphere.hpp"
 #include "Pomdog/Math/ContainmentType.hpp"
 #include "Pomdog/Math/BoundingBox.hpp"
+#include "Pomdog/Math/Ray.hpp"
 #include "Pomdog/Utility/Assert.hpp"
 
 namespace Pomdog {
@@ -15,13 +16,13 @@ BoundingSphere::BoundingSphere(Vector3 const& center, float radius)
     POMDOG_ASSERT(radius >= 0);
 }
 //-----------------------------------------------------------------------
-bool BoundingSphere::operator==(BoundingSphere const& sphere) const
+bool BoundingSphere::operator==(BoundingSphere const& sphere) const noexcept
 {
     return this->Radius == sphere.Radius
         && this->Center == sphere.Center;
 }
 //-----------------------------------------------------------------------
-bool BoundingSphere::operator!=(BoundingSphere const& sphere) const
+bool BoundingSphere::operator!=(BoundingSphere const& sphere) const noexcept
 {
     return this->Radius != sphere.Radius
         || this->Center != sphere.Center;
@@ -79,6 +80,11 @@ bool BoundingSphere::Intersects(BoundingSphere const& sphere) const
 {
     auto distance = Vector3::Distance(this->Center, sphere.Center);
     return distance <= this->Radius + sphere.Radius;
+}
+//-----------------------------------------------------------------------
+Optional<float> BoundingSphere::Intersects(Ray const& ray) const
+{
+    return ray.Intersects(*this);
 }
 
 } // namespace Pomdog

@@ -6,6 +6,7 @@
 
 #include "detail/ForwardDeclarations.hpp"
 #include "Pomdog/Math/Vector3.hpp"
+#include "Pomdog/Utility/Optional.hpp"
 #include "Pomdog/Basic/Export.hpp"
 
 namespace Pomdog {
@@ -20,8 +21,8 @@ public:
 
     BoundingSphere(Vector3 const& center, float radius);
 
-    bool operator==(BoundingSphere const&) const;
-    bool operator!=(BoundingSphere const&) const;
+    bool operator==(BoundingSphere const&) const noexcept;
+    bool operator!=(BoundingSphere const&) const noexcept;
 
     ContainmentType Contains(Vector3 const& point) const;
 
@@ -32,6 +33,8 @@ public:
     bool Intersects(BoundingBox const& box) const;
 
     bool Intersects(BoundingSphere const& sphere) const;
+
+    Optional<float> Intersects(Ray const& ray) const;
 };
 
 } // namespace Pomdog

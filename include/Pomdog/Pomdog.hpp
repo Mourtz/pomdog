@@ -41,6 +41,7 @@
 #include "Math/Point3D.hpp"
 #include "Math/Quaternion.hpp"
 #include "Math/Radian.hpp"
+#include "Math/Ray.hpp"
 #include "Math/Rectangle.hpp"
 #include "Math/Vector2.hpp"
 #include "Math/Vector3.hpp"
@@ -122,6 +123,7 @@
 #include "Signals/ConnectionList.hpp"
 #include "Signals/Event.hpp"
 #include "Signals/EventQueue.hpp"
+#include "Signals/Helpers.hpp"
 #include "Signals/ScopedConnection.hpp"
 #include "Signals/Signal.hpp"
 

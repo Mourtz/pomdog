@@ -16,6 +16,7 @@
 #include "Pomdog/Graphics/PrimitiveTopology.hpp"
 #include "Pomdog/Graphics/Shader.hpp"
 #include "Pomdog/Graphics/VertexBuffer.hpp"
+#include "Pomdog/Math/BoundingBox.hpp"
 #include "Pomdog/Math/Color.hpp"
 #include "Pomdog/Math/MathHelper.hpp"
 #include "Pomdog/Math/Matrix3x2.hpp"
@@ -188,6 +189,33 @@ void PolygonBatch::DrawArc(
         position, radius, startAngle, arcAngle, segments, color);
 }
 //-----------------------------------------------------------------------
+void PolygonBatch::DrawBox(
+    BoundingBox const& box,
+    Color const& color)
+{
+    POMDOG_ASSERT(impl);
+    impl->polygonShapes.DrawBox(box.Min, box.Max - box.Min, color);
+}
+//-----------------------------------------------------------------------
+void PolygonBatch::DrawBox(
+    Vector3 const& position,
+    Vector3 const& scale,
+    Color const& color)
+{
+    POMDOG_ASSERT(impl);
+    impl->polygonShapes.DrawBox(position, scale, color);
+}
+//-----------------------------------------------------------------------
+void PolygonBatch::DrawBox(
+    Vector3 const& position,
+    Vector3 const& scale,
+    Vector3 const& originPivot,
+    Color const& color)
+{
+    POMDOG_ASSERT(impl);
+    impl->polygonShapes.DrawBox(position, scale, originPivot, color);
+}
+//-----------------------------------------------------------------------
 void PolygonBatch::DrawCircle(
     Vector2 const& position,
     float radius,
@@ -290,6 +318,17 @@ void PolygonBatch::DrawRectangle(
     POMDOG_ASSERT(impl);
     impl->polygonShapes.DrawRectangle(
         position, width, height, originPivot, color);
+}
+//-----------------------------------------------------------------------
+void PolygonBatch::DrawSphere(
+    Vector3 const& position,
+    float radius,
+    Color const& color,
+    std::size_t segments)
+{
+    POMDOG_ASSERT(impl);
+    impl->polygonShapes.DrawSphere(
+        position, radius, color, segments);
 }
 //-----------------------------------------------------------------------
 void PolygonBatch::DrawTriangle(

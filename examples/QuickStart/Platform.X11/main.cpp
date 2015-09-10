@@ -1,6 +1,3 @@
-// Copyright (c) 2013-2015 mogemimi.
-// Distributed under the MIT license. See LICENSE.md file for details.
-
 #include "../Source/QuickStartGame.hpp"
 #include <Pomdog/Platform/X11/Bootstrap.hpp>
 #include <Pomdog/Pomdog.hpp>
@@ -11,8 +8,7 @@ int main(int argc, char** argv)
 
 #if defined(DEBUG) && !defined(NDEBUG)
     Log::SetLevel(LogLevel::Internal);
-    ScopedConnection connection = Log::Connect([](LogEntry const& entry)
-    {
+    ScopedConnection connection = Log::Connect([](LogEntry const& entry) {
         std::printf("%s\n", entry.Message.c_str());
     });
 #endif
